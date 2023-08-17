@@ -32,7 +32,23 @@ quizForm.addEventListener("submit", function (event) {
     event.preventDefault();
     calculateScore();
     showTryAgainButton();
+    checkAnswers();
 });
+
+function checkAnswers() {
+    Object.keys(correctAnswers).forEach(key => {
+        const userAnswer = document.getElementById(key).value.trim().toLowerCase();
+        const correctAnswer = correctAnswers[key].toLowerCase();
+        const answerInput = document.getElementById(key);
+
+        if (userAnswer === correctAnswer) {
+            answerInput.style.backgroundColor = "#4CAF50";
+        } else {
+            answerInput.style.backgroundColor = "#FF5733";
+            answerInput.value = correctAnswers[key];
+        }
+    });
+}
 
 tryAgainButton.addEventListener("click", function () {
     resetForm();
